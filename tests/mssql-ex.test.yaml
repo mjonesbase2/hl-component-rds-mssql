@@ -1,0 +1,11 @@
+test_metadata:
+  type: config
+  name: sqlserver-ex
+  description: Create RDS mssql ex
+
+
+
+# CLI to query engine and family: aws rds describe-db-engine-versions
+engine: 'sqlserver-ex'
+engine_version: '14.00.3049.1.v1'
+family: sqlserver-ex-14.0
