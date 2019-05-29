@@ -8,10 +8,37 @@ CloudFormation do
   
     extra_tags.each { |key,value| tags << { Key: key, Value: value } } if defined? extra_tags
   
+    ingress = []
+    security_group_rules.each do |rule|
+      sg_rule = {
+        FromPort: 1433,
+        IpProtocol: 'TCP',
+        ToPort: 1433,
+      }
+      if rule['security_group_id']
+        sg_rule['SourceSecurityGroupId'] = FnSub(rule['security_group_id'])
+      else 
+        sg_rule['CidrIp'] = FnSub(rule['ip']) 
+      end
+      if rule['desc']
+        sg_rule['Description'] = FnSub(rule['desc'])
+      end
+      ingress << sg_rule
+    end if defined?(security_group_rules)
+
     EC2_SecurityGroup "SecurityGroupRDS" do
       VpcId Ref('VPCId')
       GroupDescription FnJoin(' ', [ Ref(:EnvironmentName), component_name, 'security group' ])
-      SecurityGroupIngress sg_create_rules(security_group, ip_blocks)
+      SecurityGroupIngress ingress if ingress.any?
+      SecurityGroupEgress ([
+        {
+          CidrIp: "0.0.0.0/0",
+          Description: "outbound all for ports",
+          FromPort: -1,
+          IpProtocol: 'TCP',
+          ToPort: -1
+        }
+      ]) 
       Tags tags + [{ Key: 'Name', Value: FnJoin('-', [ Ref(:EnvironmentName), component_name, 'security-group' ])}]
     end
   
