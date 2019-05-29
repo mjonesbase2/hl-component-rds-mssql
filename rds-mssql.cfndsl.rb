@@ -1,9 +1,7 @@
 CloudFormation do
 
     Description "#{component_name} - #{component_version}"
-  
-    az_conditions_resources('SubnetPersistence', maximum_availability_zones)
-  
+    
     tags = []
     tags << { Key: 'Environment', Value: Ref(:EnvironmentName) }
     tags << { Key: 'EnvironmentType', Value: Ref(:EnvironmentType) }
@@ -19,7 +17,7 @@ CloudFormation do
   
     RDS_DBSubnetGroup 'SubnetGroupRDS' do
       DBSubnetGroupDescription FnJoin(' ', [ Ref(:EnvironmentName), component_name, 'subnet group' ])
-      SubnetIds az_conditional_resources('SubnetPersistence', maximum_availability_zones)
+      SubnetIds Ref('SubnetIds')
       Tags tags + [{ Key: 'Name', Value: FnJoin('-', [ Ref(:EnvironmentName), component_name, 'subnet-group' ])}]
     end
   
@@ -32,7 +30,6 @@ CloudFormation do
 
     instance_username = defined?(master_username) ? master_username : FnJoin('', [ '{{resolve:ssm:', FnSub(master_login['username_ssm_param']), ':1}}' ])
     instance_password = defined?(master_password) ? master_password : FnJoin('', [ '{{resolve:ssm-secure:', FnSub(master_login['password_ssm_param']), ':1}}' ])
-  
   
     RDS_DBInstance 'RDS' do
       DeletionPolicy deletion_policy if defined? deletion_policy
