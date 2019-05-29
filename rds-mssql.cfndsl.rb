@@ -33,17 +33,10 @@ CloudFormation do
       SecurityGroupEgress ([
         {
           CidrIp: "0.0.0.0/0",
-          Description: "outbound all for port 22",
-          FromPort: 22,
+          Description: "outbound all for ports",
+          FromPort: -1,
           IpProtocol: 'TCP',
-          ToPort: 22
-        },
-        {
-          CidrIp: "0.0.0.0/0",
-          Description: "outbound all for port ephemeral ports",
-          FromPort: 1024,
-          IpProtocol: 'TCP',
-          ToPort: 65535
+          ToPort: -1
         }
       ]) 
       Tags tags + [{ Key: 'Name', Value: FnJoin('-', [ Ref(:EnvironmentName), component_name, 'security-group' ])}]
