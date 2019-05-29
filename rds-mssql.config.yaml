@@ -22,3 +22,7 @@ publicly_accessible: false
 #     desc: Public access
 #   - security_group_id: sg-1234567
 #     desc: My security group
+
+storage_encrypted: True
+#kms_key_id: arn:aws:kms:ap-southeast-2:111111111111:key/12345678-1234-1234-1234-111111111111
+                                        

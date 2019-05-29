@@ -86,6 +86,8 @@ CloudFormation do
           ]
         }
       })
+      StorageEncrypted storage_encrypted if defined? storage_encrypted
+      KmsKeyId kms_key_id if (defined? kms_key_id) && (storage_encrypted == true)
     end
   
     record = defined?(dns_record) ? dns_record : 'mssql'
