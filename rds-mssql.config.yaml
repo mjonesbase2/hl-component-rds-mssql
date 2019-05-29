@@ -1,0 +1,28 @@
+# CLI to query engine and family: aws rds describe-db-engine-versions
+engine: 'sqlserver-web'     # sqlserver-ee | sqlserver-se | sqlserver-ex | sqlserver-web
+engine_version: '14.00.3035.2.v1'
+family: sqlserver-web-14.0
+
+#dns_record: mssql
+
+#deletion_policy: Snapshot
+
+# parameters:
+#   authentication_timeout: '60'
+
+master_login:
+  username_ssm_param: /rds/RDS_MASTER_USERNAME
+  password_ssm_param: /rds/RDS_MASTER_PASSWORD
+
+publicly_accessible: false
+
+# You are able to specify ips and security groups to be added to the rule.
+# security_group_rules:
+#   - ip: 0.0.0.0/0
+#     desc: Public access
+#   - security_group_id: sg-1234567
+#     desc: My security group
+
+storage_encrypted: True
+#kms_key_id: arn:aws:kms:ap-southeast-2:111111111111:key/12345678-1234-1234-1234-111111111111
+                                        
