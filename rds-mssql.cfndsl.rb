@@ -72,11 +72,20 @@ CloudFormation do
       DBSubnetGroupName  Ref('SubnetGroupRDS')
       VPCSecurityGroups [Ref('SecurityGroupRDS')]
       MultiAZ Ref('MultiAZ')
+      PubliclyAccessible publicly_accessible if defined? publicly_accessible
       Tags  tags + [
         { Key: 'Name', Value: FnJoin('-', [ Ref(:EnvironmentName), component_name, 'instance' ])},
         { Key: 'SnapshotID', Value: Ref('RDSSnapshotID')},
         { Key: 'Version', Value: family}
       ]
+      Metadata({
+        cfn_nag: {
+          rules_to_suppress: [
+            { id: 'F23', reason: 'ignoring until further action is required' },
+            { id: 'F24', reason: 'ignoring until further action is required' }
+          ]
+        }
+      })
     end
   
     record = defined?(dns_record) ? dns_record : 'mssql'
