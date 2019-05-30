@@ -34,9 +34,7 @@ CloudFormation do
         {
           CidrIp: "0.0.0.0/0",
           Description: "outbound all for ports",
-          FromPort: -1,
-          IpProtocol: 'TCP',
-          ToPort: -1
+          IpProtocol: -1,
         }
       ]) 
       Tags tags + [{ Key: 'Name', Value: FnJoin('-', [ Ref(:EnvironmentName), component_name, 'security-group' ])}]
