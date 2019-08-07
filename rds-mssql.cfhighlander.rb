@@ -16,5 +16,7 @@ CfhighlanderTemplate do
       ComponentParam 'RDSAllocatedStorage'
       ComponentParam 'DnsDomain'
       ComponentParam 'SubnetIds', type: 'CommaDelimitedList'
+      ComponentParam 'DatabaseBucket' if defined?(native_backup_restore) and native_backup_restore
     end
 end
+

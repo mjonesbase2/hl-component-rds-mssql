@@ -1,0 +1,12 @@
+test_metadata:
+  type: config
+  name: sqlserver-collation
+  description: Test a specified character set
+
+engine: 'sqlserver-web'
+family: sqlserver-web-13.0
+engine_version: '13.00.5216.0.v1'
+
+character_set: 'Latin1_General_CI_AS'
+
+storage_encrypted: true

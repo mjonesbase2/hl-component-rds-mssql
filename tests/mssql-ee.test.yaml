@@ -3,9 +3,9 @@ test_metadata:
   name: sqlserver-ee
   description: Create RDS mssql ee
 
-
-
 # CLI to query engine and family: aws rds describe-db-engine-versions
 engine: 'sqlserver-ee'
 engine_version: '14.00.3049.1.v1'
 family: sqlserver-ee-14.0
+
+storage_encrypted: true

@@ -1,0 +1,12 @@
+test_metadata:
+  type: config
+  name: sqlserver-nbr
+  description: Test the native backup/restore
+
+engine: 'sqlserver-web'
+family: sqlserver-web-13.0
+engine_version: '13.00.5216.0.v1'
+
+native_backup_restore: true
+
+storage_encrypted: true
