@@ -33,3 +33,6 @@ storage_encrypted: false
 #Set to true to enable the mssql option to backup/restore from backup files in an S3 bucket
 #Pass the bucket name to the component with the DatabaseBucket parameter
 #native_backup_restore: false
+
+#Sometimes required to be specified for configurations with options enabled
+#license_model: license-included | bring-your-own-license | general-public-license

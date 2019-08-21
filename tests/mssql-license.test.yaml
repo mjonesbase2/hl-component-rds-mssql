@@ -1,0 +1,13 @@
+test_metadata:
+  type: config
+  name: sqlserver-license-model
+  description: Create RDS mssql SE with license model specified
+
+# CLI to query engine and family: aws rds describe-db-engine-versions
+engine: 'sqlserver-se'
+engine_version: '14.00.3049.1.v1'
+family: sqlserver-se-14.0
+
+storage_encrypted: true
+native_backup_restore: true
+license_model: license-included
