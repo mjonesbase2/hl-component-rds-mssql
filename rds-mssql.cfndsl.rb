@@ -39,6 +39,11 @@ CloudFormation do
     ]) 
     Tags tags + [{ Key: 'Name', Value: FnJoin('-', [ Ref(:EnvironmentName), component_name, 'security-group' ])}]
   end
+  Output(:SecurityGroup) {
+    Value(Ref(:SecurityGroupRDS))
+    Export FnSub("${EnvironmentName}-#{external_parameters[:component_name]}-SecurityGroup")
+  }
+
 
   RDS_DBSubnetGroup 'SubnetGroupRDS' do
     DBSubnetGroupDescription FnJoin(' ', [ Ref(:EnvironmentName), component_name, 'subnet group' ])
