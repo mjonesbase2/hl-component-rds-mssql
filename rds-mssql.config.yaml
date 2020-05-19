@@ -36,3 +36,9 @@ storage_encrypted: false
 
 #Sometimes required to be specified for configurations with options enabled
 #license_model: license-included | bring-your-own-license | general-public-license
+
+#
+#maintenance_window:
+
+#The daily time range during which automated backups are created if automated backups are enabled,
+#backup_window:
