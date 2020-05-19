@@ -36,3 +36,9 @@ storage_encrypted: false
 
 #Sometimes required to be specified for configurations with options enabled
 #license_model: license-included | bring-your-own-license | general-public-license
+
+#The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
+#maintenance_window: ddd:hh24:mi-ddd:hh24:mi
+
+#The daily time range during which automated backups are created if automated backups are enabled
+#backup_window: hh24:mi-hh24:mi

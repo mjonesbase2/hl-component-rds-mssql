@@ -116,6 +116,9 @@ CloudFormation do
   instance_username = defined?(master_username) ? master_username : FnJoin('', [ '{{resolve:ssm:', FnSub(master_login['username_ssm_param']), ':1}}' ])
   instance_password = defined?(master_password) ? master_password : FnJoin('', [ '{{resolve:ssm-secure:', FnSub(master_login['password_ssm_param']), ':1}}' ])
 
+  maintenance_window = external_parameters.fetch(:maintenance_window, nil)
+  backup_window = external_parameters.fetch(:backup_window, nil)
+
   RDS_DBInstance 'RDS' do
     DeletionPolicy deletion_policy if defined? deletion_policy
     DBInstanceClass Ref('RDSInstanceType')
@@ -134,6 +137,8 @@ CloudFormation do
     OptionGroupName Ref('OptionGroupRDS') if defined? native_backup_restore
     CharacterSetName character_set if defined? character_set
     LicenseModel license_model if defined? license_model
+    PreferredBackupWindow backup_window unless backup_window.nil?
+    PreferredMaintenanceWindow maintenance_window unless maintenance_window.nil?
     Tags  tags + [
       { Key: 'Name', Value: FnJoin('-', [ Ref(:EnvironmentName), component_name, 'instance' ])},
       { Key: 'SnapshotID', Value: Ref('RDSSnapshotID')},
