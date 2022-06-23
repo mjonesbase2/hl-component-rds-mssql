@@ -118,6 +118,7 @@ CloudFormation do
 
   maintenance_window = external_parameters.fetch(:maintenance_window, nil)
   backup_window = external_parameters.fetch(:backup_window, nil)
+  backup_retention_period = external_parameters.fetch(:backup_retention_period, 1)
 
   RDS_DBInstance 'RDS' do
     DeletionPolicy deletion_policy if defined? deletion_policy
@@ -139,6 +140,7 @@ CloudFormation do
     LicenseModel license_model if defined? license_model
     PreferredBackupWindow backup_window unless backup_window.nil?
     PreferredMaintenanceWindow maintenance_window unless maintenance_window.nil?
+    BackupRetentionPeriod backup_retention_period
     Tags  tags + [
       { Key: 'Name', Value: FnJoin('-', [ Ref(:EnvironmentName), component_name, 'instance' ])},
       { Key: 'SnapshotID', Value: Ref('RDSSnapshotID')},
