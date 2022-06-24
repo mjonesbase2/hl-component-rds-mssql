@@ -55,6 +55,7 @@ license_model: license-included
 storage_encrypted: true
 maintenance_window: sat:18:00-sat:18:30
 backup_window: 16:00-17:00
+backup_retention_period: 10
 
 security_group:
   -

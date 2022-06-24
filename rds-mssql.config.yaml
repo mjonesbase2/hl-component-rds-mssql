@@ -42,3 +42,6 @@ storage_encrypted: false
 
 #The daily time range during which automated backups are created if automated backups are enabled
 #backup_window: hh24:mi-hh24:mi
+
+#Number of days to retain AWS automated backups
+#backup_retention_period: 10
