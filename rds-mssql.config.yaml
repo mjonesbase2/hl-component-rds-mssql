@@ -45,3 +45,6 @@ storage_encrypted: false
 
 #Number of days to retain AWS automated backups
 #backup_retention_period: 10
+
+#parameter to allow major version upgrades
+#allow_major_version_upgrade: true

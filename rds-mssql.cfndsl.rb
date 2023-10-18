@@ -119,8 +119,10 @@ CloudFormation do
   maintenance_window = external_parameters.fetch(:maintenance_window, nil)
   backup_window = external_parameters.fetch(:backup_window, nil)
   backup_retention_period = external_parameters.fetch(:backup_retention_period, nil)
+  allow_major_version_upgrade = external_parameters.fetch(:allow_major_version_upgrade, nil)
 
   RDS_DBInstance 'RDS' do
+    AllowMajorVersionUpgrade allow_major_version_upgrade unless allow_major_version_upgrade.nil?
     DeletionPolicy deletion_policy if defined? deletion_policy
     DBInstanceClass Ref('RDSInstanceType')
     AllocatedStorage Ref('RDSAllocatedStorage')
